@@ -62,13 +62,13 @@ class MyUser(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff 
         return self.is_admin
+
     
 from  main.tasks import send_verification_email
 def user_post_save(sender, instance, signal, *args, **kwargs): 
     print(instance.email)
     if not instance.is_verified:
         send_verification_email.delay(instance.pk)      
-signals.post_save.connect(user_post_save, sender= MyUser)
-    
+signals.post_save.connect(user_post_save, sender= MyUser)    
 
 
