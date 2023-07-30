@@ -13,5 +13,4 @@ def view_post(request, slug):
     
     post.view_count += 1
     post.save()
-
     return render(request, 'post.html', context={'post': post})
